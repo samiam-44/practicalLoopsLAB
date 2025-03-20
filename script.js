@@ -103,56 +103,99 @@
 // console.log(info)
 
 
+// let str = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26\n`;
+
+// let info = [];
+// let row = {};
+// let cell = '';
+// let comma = 0;
+// let firstLine = true; 
+
+// // Loop through entire string
+// for (let i = 0; i < str.length; i++) {
+//   let char = str[i];
+// // to reach the end column at the comma or end of line
+//   if (char === ',' || char === '\n') {
+//     if (comma === 1) {
+//       row.ID = cell;
+//     } else if (comma === 2) {
+//       row.Name = cell;
+//     } else if (comma === 3) {
+//       row.Occupation = cell;
+//     } else if (comma === 4) {
+//       row.Age = cell;
+//     }
+//     // loop starts over and increment commas
+// cell = '';
+// comma++;
+
+// // '\n' means new row
+// if (char === '\n') {
+//   if (!firstLine) {
+//     info.push({ ...row});
+//   }
+//   // loop starts over for following row
+//   row = {};
+//   comma = 0;
+//   firstLine = false; 
+// }
+// // if character is not comma or new line it stays in cell
+// } else {
+//   cell += char;
+// }
+// }
+// console.log(info)
 
 
-
-
-
-
-let str = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26\n`;
+const array = [["ID", "Name", "Occupation", "Age"],
+["42", "Bruce", "Knight", "41"],
+["57", "Bob", "Fry Cook", "19"],
+["63", "Blaine", "Quiz Master", "58"],
+["98", "Bill", "Doctor’s Assistant", "26"]]
 
 let info = [];
 let row = {};
 let cell = '';
 let comma = 0;
-let firstLine = true; 
+let firstLine = true;
+let numColumns = 0;
+let header = []
 
 // Loop through entire string
-for (let i = 0; i < str.length; i++) {
-  let char = str[i];
-// to reach the end column at the comma or end of line
+for (let i = 0; i < array.length; i++) {
+  let char = array[i];
+  // to reach the end column at the comma or end of line
   if (char === ',' || char === '\n') {
-    if (comma === 1) {
-      row.ID = cell;
-    } else if (comma === 2) {
-      row.Name = cell;
-    } else if (comma === 3) {
-      row.Occupation = cell;
-    } else if (comma === 4) {
-      row.Age = cell;
+    if (firstLine) {
+      header.push(cell);
+    } else {
+      row[header[comma]] = cell
     }
-    // loop starts over and increment commas
-cell = '';
-comma++;
-
-// '\n' means new row
-if (char === '\n') {
-  if (!firstLine) {
-    info.push({ ...row});
   }
-  // loop starts over for following row
-  row = {};
-  comma = 0;
-  firstLine = false; 
+  // loop starts over and increment commas
+  cell = '';
+  comma++;
+
+  if (firstLine && char === ',') {
+    numColumns++;
+  }
+
+  // '\n' means new row
+  if (char === '\n') {
+    if (!firstLine) {
+      info.push({ ...row });
+    }
+    // loop starts over for following row
+    row = {};
+    comma = 0;
+    firstLine = false;
+  }
+  
+  // if character is not comma or new line it stays in cell
+  else {
+    cell += char;
+  }
+
 }
-// if character is not comma or new line it stays in cell
-} else {
-  cell += char;
-}
-}
-console.log(info)
 
-
-
-
-
+console.log(array)
