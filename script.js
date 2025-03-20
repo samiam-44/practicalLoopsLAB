@@ -41,49 +41,92 @@
 //     }
 // }
 
-// Variables
-let str = `Index,Mass (kg),Spring 1 (m),Spring 2 (m)\n1,0.00,0.050,0.050\n2,0.49,0.066,0.066\n3,0.98,0.087,0.080\n4,1.47,0.116,0.108\n5,1.96,0.142,0.138\n6,2.45,0.166,0.158\n7,2.94,0.193,0.174\n8,3.43,0.204,0.192\n9,3.92,0.226,0.205\n10,4.41,0.238,0.232`;
+// // Variables
+// let str = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26`
 
-let cell1 = ``;
-let cell2 = ``;
-let cell3 = ``;
-let cell4 = ``;
-let commas = 0;
+// let cell1 = ``;
+// let cell2 = ``;
+// let cell3 = ``;
+// let cell4 = ``;
+// let commas = 0;
 
+// for (let i = 0; i < str.length; i++) {
+//   if (str[i] === ',') {
+//     // if char is a comma, do this
+//     commas++;
+//   } else if (str[i] === '\n') {
+//     //If char is a "\n", do this\
+//     console.log(cell1, cell2, cell3, cell4);
+//     commas = 0;
+//     cell1 = ``;
+//     cell2 = ``;
+//     cell3 = ``;
+//     cell4 = ``;
+
+//   } else {
+//     // any other char
+//     if (commas == 0) {
+//       // if 0 commas
+//       cell1 += str[i];
+//     } else if (commas == 1) {
+//       // if 1 commas
+//       cell2 += str[i];
+//     } else if (commas == 2) {
+//       // if 2 commas
+//       cell3 += str[i];
+//     } else {
+//       // if 3 or more
+//       cell4 += str[i];
+//     }
+//   }
+
+//   if(i === str.length - 1) { // if index number is the same as length of string
+//     console.log(cell1, cell2, cell3, cell4);
+//   }
+// }
+
+
+// // When code is outdated or inefficient, it often goes through a process called “refactoring.” Refactoring code is the process of restructuring that code without changing its original behavior.
+let str = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26`;
+
+let info = [];
+let row = {};
+let cell = '';
+let comma = 0;
+let firstLine = true; 
+// Loop through entire string
 for (let i = 0; i < str.length; i++) {
-  if (str[i] === ',') {
-    // if char is a comma, do this
-    commas++;
-  } else if (str[i] === '\n') {
-    //If char is a "\n", do this\
-    console.log(cell1, cell2, cell3, cell4);
-    commas = 0;
-    cell1 = ``;
-    cell2 = ``;
-    cell3 = ``;
-    cell4 = ``;
-
-  } else {
-    // any other char
-    if (commas == 0) {
-      // if 0 commas
-      cell1 += str[i];
-    } else if (commas == 1) {
-      // if 1 commas
-      cell2 += str[i];
-    } else if (commas == 2) {
-      // if 2 commas
-      cell3 += str[i];
-    } else {
-      // if 3 or more
-      cell4 += str[i];
+  let char = str[i];
+// to reach the end column at the comma or end of line
+  if (char === ',' || char === '\n') {
+    if (comma === 0) {
+      row.ID = cell;
+    } else if (comma === 1) {
+      row.Name = cell;
+    } else if (comma === 2) {
+      row.Occupation = cell;
+    } else if (comma === 3) {
+      row.Age = cell;
     }
-  }
+    // loop starts over and increment commas
+cell = '';
+comma++;
 
-  if(i === str.length - 1) { // if index number is the same as length of string
-    console.log(cell1, cell2, cell3, cell4);
+// '\n' means new row
+if (char === '\n') {
+  if (!firstLine) {
+    info.push({ ...row});
   }
+  // loop starts over for following row
+  row = {};
+  comma = 0;
+  firstLine = false; 
 }
-
-
-
+// if character is not comma or new line it stays in cell
+} else {
+  cell += char;
+}
+}
+info.forEach(person => {
+  console.log(`Name: ${person.Name}, ID: ${person.ID}, Occupation: ${person.Occupation}, Age: ${person.Age}`);
+})
