@@ -12,34 +12,6 @@
 
 // // }
 
-// // FEELING LOOPY
-
-// let str = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26`
-
-// let cell1 = ``;
-// let cell2 = ``;
-// let cell3 = ``;
-// let cell4 = ``;
-// let commas = 0;
-
-// for(let i =0; i < str.length; i++){
-//     if(str[i] === ","){
-//         commas++;
-//     } else if(str[i] === "\n") {
-//         commas = 0;
-//     } else {
-//        if (commas ==0) {
-//          console.log(`Cell1`);
-//        } else if(commas == 1){
-//         console.log(`Cell2`)
-//        } else if(commas == 2){
-//         console.log(`Cell3`)
-//        }
-//     }
-//     if(i === str.length - 1) {
-
-//     }
-// }
 
 // // Variables
 // let str = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26`
@@ -87,25 +59,76 @@
 
 
 // // When code is outdated or inefficient, it often goes through a process called “refactoring.” Refactoring code is the process of restructuring that code without changing its original behavior.
-let str = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26`;
+// let str = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26\n`;
+
+// let info = [];
+// let row = {};
+// let cell = '';
+// let comma = 0;
+// let firstLine = true; 
+
+// // Loop through entire string
+// for (let i = 0; i < str.length; i++) {
+//   let char = str[i];
+// // to reach the end column at the comma or end of line
+//   if (char === ',' || char === '\n') {
+//     if (comma === 1) {
+//       row.ID = cell;
+//     } else if (comma === 2) {
+//       row.Name = cell;
+//     } else if (comma === 3) {
+//       row.Occupation = cell;
+//     } else if (comma === 4) {
+//       row.Age = cell;
+//     }
+//     // loop starts over and increment commas
+// cell = '';
+// comma++;
+
+// // '\n' means new row
+// if (char === '\n') {
+//   if (!firstLine) {
+//     info.push({ ...row});
+//   }
+//   // loop starts over for following row
+//   row = {};
+//   comma = 0;
+//   firstLine = false; 
+// }
+// // if character is not comma or new line it stays in cell
+// } else {
+//   cell += char;
+// }
+// }
+// console.log(info)
+
+
+
+
+
+
+
+
+let str = `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26\n`;
 
 let info = [];
 let row = {};
 let cell = '';
 let comma = 0;
 let firstLine = true; 
+
 // Loop through entire string
 for (let i = 0; i < str.length; i++) {
   let char = str[i];
 // to reach the end column at the comma or end of line
   if (char === ',' || char === '\n') {
-    if (comma === 0) {
+    if (comma === 1) {
       row.ID = cell;
-    } else if (comma === 1) {
-      row.Name = cell;
     } else if (comma === 2) {
-      row.Occupation = cell;
+      row.Name = cell;
     } else if (comma === 3) {
+      row.Occupation = cell;
+    } else if (comma === 4) {
       row.Age = cell;
     }
     // loop starts over and increment commas
@@ -127,6 +150,9 @@ if (char === '\n') {
   cell += char;
 }
 }
-info.forEach(person => {
-  console.log(`Name: ${person.Name}, ID: ${person.ID}, Occupation: ${person.Occupation}, Age: ${person.Age}`);
-})
+console.log(info)
+
+
+
+
+
