@@ -139,4 +139,14 @@ let objectInfo = [
 objectInfo.push({ id: "7", name: "Bilbo", occupation: "None", age: "111"});
 
 console.log("new info array", objectInfo);
+// AVERAGE AGE
+let ageArray = ["41", "19", "58", "26"]
+let sum = 0;
+for (let i = 0; i < ageArray.length; i++) {
+    sum += parseInt(ageArray[i])
+}
+let average = sum / ageArray.length;
+console.log("The average of the age array is:", average);
+
+
 
